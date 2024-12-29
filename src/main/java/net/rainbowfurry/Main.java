@@ -32,9 +32,6 @@ public class Main
     private static LogManager _logger;
 
     public static void main( String[] args ) throws IOException {
-        //https://discord.com/oauth2/authorize?client_id=1322292948918079630&permissions=8&scope=bot
-        //MTMyMjI5Mjk0ODkxODA3OTYzMA.GgFQWw.eaz79gDGUdiliCmZnaEi8l3ZWENKxVPxBNrMyU
-        String token = "MTMyMjI5Mjk0ODkxODA3OTYzMA.GgFQWw.eaz79gDGUdiliCmZnaEi8l3ZWENKxVPxBNrMyU";
 
         // Init Logger
         logger = Logger.getGlobal();
@@ -54,7 +51,7 @@ public class Main
 
         // Init Bot
         _logger.Log(LogManager.LogType.SYSTEM, 1, "Start loading Bot.");
-        builder = JDABuilder.createDefault(token);
+        builder = JDABuilder.createDefault(configManager.getKey("token"));
         builder.setAutoReconnect(true);
         builder.disableCache(CacheFlag.MEMBER_OVERRIDES, new CacheFlag[] { CacheFlag.VOICE_STATE });
         builder.setBulkDeleteSplittingEnabled(false);
