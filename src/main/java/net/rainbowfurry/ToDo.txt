@@ -1,0 +1,23 @@
+Config einbinden - prefix etc
+Beschreibung alle base Klassen - was macht was
+check if bot channel, check if permission
+
+random status
+wie in bot command integrated
+
+support
+ticket
+giveaway
+joinrole
+selfrole
+join leave message
+
+Commands:
+kick ban warn mute
+user,server, bot info
+
+Listener:
+Support
+Verification
+Join Role
+Reaction Role
