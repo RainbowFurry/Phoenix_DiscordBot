@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
@@ -55,7 +56,8 @@ public class Main
         logger = Logger.getGlobal();
         System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s %n");
         _logger = new LogManager();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "\nBotName: Phoenix\nCreator: Jasmin Hoffmann\nNickName:RainbowFurry\n\n");
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "\nBotName: Phoenix\nCreator: Jasmin Hoffmann\nNickName:RainbowFurry\n");
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "All Infos About the Bot: https://docs.rainbowfurry.com/phoenix-discord-bot\n\n");
         _logger.Log(LogManager.LogType.SYSTEM, 1, "The Bot is starting Up!");
         _logger.Log(LogManager.LogType.SYSTEM, 1, "The Logger has been initialized and loaded!");
 
@@ -93,7 +95,8 @@ public class Main
         Guild guild = jda.getGuildById("1309574664141668393");
         if (guild != null) {
             guild.updateCommands().addCommands(
-                    Commands.user("Moderation")
+                    Commands.user("Moderation"),
+                    Commands.slash("Badge", "Get the Dev Badge :D")
             ).queue();
         }
 
@@ -157,6 +160,7 @@ public class Main
         jda.addEventListener(new SelfroleListener());
         jda.addEventListener(new GiveAwayListener());
         jda.addEventListener(new JoinRolesListener());
+        jda.addEventListener(new VerificationListener());
 
     }
 
@@ -209,9 +213,10 @@ public class Main
     private void registerBotInteractionCommands(){
         commands.addCommands(
                 // Auf server der Command Menu Button
-                Commands.slash("botinfo", "Provides Info about the Bot"),
+                Commands.slash("botinfo", "Provides Info about the Bot").addOption(OptionType.USER, "User", "Mention User").addSubcommands(),
                 Commands.slash("serverinfo", "Provides Info about the Server"),
-                Commands.slash("ping", "Shows your Connection to the Server.")
+                Commands.slash("ping", "Shows your Connection to the Server."),
+                Commands.slash("test", "For Testing!!!")
         );
         _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot Command Interaction Commands");
     }
