@@ -10,6 +10,16 @@ public class CommandInteractionListener extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+
+        if(event.getName().equals("test")){
+            event.reply("TEST").queue();
+        }
+
+        if(event.getName().equals("badge")){
+            System.out.println("Wait 24h and claim your Badge!");
+            event.reply("Wait 24h and claim your Badge!").queue();
+        }
+
         if (event.getName().equals("hello")) {
             event.reply("Click the button to say hello")
                     .addActionRow(
