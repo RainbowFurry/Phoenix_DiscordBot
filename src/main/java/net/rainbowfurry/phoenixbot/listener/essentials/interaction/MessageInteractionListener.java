@@ -7,8 +7,12 @@ public class MessageInteractionListener extends ListenerAdapter {
 
     @Override
     public void onMessageContextInteraction(MessageContextInteractionEvent event) {
-        if (event.getName().equals("Count words")) {
-            event.reply("Words: " + event.getTarget().getContentRaw().split("\\s+").length).queue();
+        switch (event.getName()) {
+
+            case "Count words":
+                event.reply("Words: " + event.getTarget().getContentRaw().split("\\s+").length).queue();
+                break;
+
         }
     }
 
