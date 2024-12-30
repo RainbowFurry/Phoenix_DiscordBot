@@ -2,9 +2,11 @@ package net.rainbowfurry.phoenixbot.commands.info;
 
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
 import net.rainbowfurry.phoenixbot.commands.Command;
+import net.rainbowfurry.phoenixbot.core.CommandParser;
 
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
@@ -20,21 +22,15 @@ public class UserInfo implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) throws Exception {
+        if(event.getMember() != null)
+            displayUserInfo(event.getMember(), event.getChannel());
+    }
 
-        Member member = event.getGuild().getMemberById(event.getMessage().getMentions().getUsers().get(0).getId());
+    /*public void displayUserInfo(Event event){}*/
 
-        String roles = "";
-        int index = 0;
-        int size = member.getRoles().size();
-        for(Role role : member.getRoles()) {
-            roles += role.getName();
-            if(index < size -1)
-                roles += " | ";
-            index++;
-        }
-
-        customEmbedBuilder.setEmbedColor(Color.GREEN).//setAuthor("Phenix-Network").
-                setThumbnail(member.getAvatarUrl()).
+    public void displayUserInfo(Member member, MessageChannel channel){
+        customEmbedBuilder.setEmbedColor(Color.GREEN).
+                setThumbnail(member.getEffectiveAvatarUrl()).
                 setTitle("**User Profile**").
                 setContent("**Profile**: " + member.getAsMention()).
                 addField("**User Name**:", member.getEffectiveName(), true).
@@ -44,10 +40,24 @@ public class UserInfo implements Command {
                 addField("**Joined**:", "`" + member.getTimeCreated().format(DateTimeFormatter.ofPattern("HH:mm\ndd. MMMM yyyy")) + "`", true).
                 addField("**Level**:", "100", false).
                 addField("**EXP**:", "min/max", false).
-                addField("**Ranks**:", roles, false).
+                addField("**Ranks**:", getUserRoles(member), false).
                 addField("**Warnings**:", "-", false);
 
-        event.getChannel().sendMessageEmbeds(customEmbedBuilder.build()).queue();
+        CommandParser.sendMessage(channel, customEmbedBuilder);
+        //channel.sendMessageEmbeds(customEmbedBuilder.build()).queue();
+    }
+
+    private String getUserRoles(Member member){
+        StringBuilder roles = new StringBuilder();
+        int index = 0;
+        int size = member.getRoles().size();
+        for(Role role : member.getRoles()) {
+            roles.append(role.getName());
+            if(index < size -1)
+                roles.append(" | ");
+            index++;
+        }
+        return roles.toString();
     }
 
     @Override
