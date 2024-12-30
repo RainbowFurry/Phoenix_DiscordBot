@@ -1,6 +1,8 @@
 package net.rainbowfurry.phoenixbot.commands;
 
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
 import net.rainbowfurry.phoenixbot.core.CommandParser;
 
 import java.awt.*;
@@ -13,7 +15,12 @@ public class Test implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        CommandParser.sendMessage(event, Color.BLUE, "TEST");
+        CustomEmbedBuilder customEmbedBuilder = new CustomEmbedBuilder();
+        Member member = event.getMember();
+
+
+        customEmbedBuilder.setEmbedColor(Color.GREEN).setThumbnail(member.getEffectiveAvatarUrl()).setContent(member.getAsMention() + "has joined the Server!");
+        CommandParser.sendMessage(event, customEmbedBuilder);
     }
 
     @Override
