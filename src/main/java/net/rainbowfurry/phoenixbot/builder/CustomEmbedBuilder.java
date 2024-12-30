@@ -99,6 +99,16 @@ public class CustomEmbedBuilder {
         return this;
     }
 
+    /**
+     * Set the Footer for the Embed
+     * @param footer String Footer
+     * @return base Class
+     */
+    public CustomEmbedBuilder setFooter(String footer, String icon){
+        embedBuilder.setFooter(footer, icon);
+        return this;
+    }
+
     public CustomEmbedBuilder addField(String title, String content, boolean inline){
         embedBuilder.addField(title, content, inline);
         return this;
