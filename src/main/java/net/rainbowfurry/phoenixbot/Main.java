@@ -75,18 +75,30 @@ public class Main
         //ToDo Example Commands In Bot Command List View
         CommandListUpdateAction commands = jda.updateCommands();
         commands.addCommands(
-                Commands.slash("hello", "Replies with a greeting!"),// Auf server der Command Menu Button (KP)
-                Commands.slash("info", "Provides information about the bot."),
-                Commands.user("Get Info"),// auf user und dann apps (info, kick, mute, warn, ban)
-                Commands.message("Get Info2")// drei punkte bei nachrichten und apps (KP)
-        );
-        commands.queue();
+                // Auf server der Command Menu Button
+                Commands.slash("botinfo", "Provides Info about the Bot"),
+                Commands.slash("serverinfo", "Provides Info about the Server"),
+                Commands.slash("ping", "Shows your Connection to the Server."),
+                // auf user und dann apps (info, kick, mute, warn, ban)
+                //ToDo nur für Guilde?
+                /*Commands.user("User Info"),
+                Commands.user("Kick"),
+                Commands.user("Mute"),
+                Commands.user("Warn"),
+                Commands.user("Ban"),*/
+                //Commands.user("Moderation"),
+                // drei punkte bei nachrichten und apps (KP)
+                Commands.message("Message Info"),
+                Commands.message("Moderation"),
+                Commands.message("Translate"),
+                Commands.message("Archive")
+        ).queue();
 
         Guild guild = jda.getGuildById("1309574664141668393");
 
         if (guild != null) {
             guild.updateCommands().addCommands(
-                    Commands.user("Get Info")
+                    Commands.user("Moderation")
             ).queue();
         }
 
