@@ -2,10 +2,15 @@ package net.rainbowfurry.phoenixbot.core;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
 
 import java.awt.*;
+import java.nio.channels.Channel;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -15,13 +20,27 @@ public class CommandParser {
     public static void sendMessage(MessageReceivedEvent event, Color color, String message){
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setColor(color);
-        embedBuilder.setFooter(event.getAuthor().getName() + " " + event.getMember().getRoles().get(0).getName(), event.getAuthor().getAvatarUrl());
+        //embedBuilder.setFooter(event.getAuthor().getName() + " " + event.getMember().getRoles().get(0).getName(), event.getAuthor().getAvatarUrl());
+        //embedBuilder.setFooter(event.getMessage().getTimeCreated().format(DateTimeFormatter.ofPattern("HH:mm\ndd. MMMM yyyy")));
+        embedBuilder.setFooter(event.getAuthor().getName() + " " + event.getMember().getRoles().get(0).getName() + event.getMessage().getTimeCreated().format(DateTimeFormatter.ofPattern("HH:mm\ndd. MMMM yyyy")), event.getAuthor().getAvatarUrl());
         embedBuilder.setDescription(message);
         event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
     }
 
+    public static void sendMessage(MessageChannel channel, EmbedBuilder embed){
+        channel.sendMessageEmbeds(embed.build()).queue();
+    }
+
+    public static void sendMessage(MessageChannel channel, CustomEmbedBuilder embed){
+        channel.sendMessageEmbeds(embed.build()).queue();
+    }
+
     public static void sendMessage(MessageReceivedEvent event, EmbedBuilder embed){
         event.getChannel().sendMessageEmbeds(embed.build()).queue();
+    }
+
+    public static void sendMessage(MessageReceivedEvent event, MessageEmbed embed){
+        event.getChannel().sendMessageEmbeds(embed).queue();
     }
 
     public static void sendMessage(MessageReceivedEvent event, CustomEmbedBuilder embed){
