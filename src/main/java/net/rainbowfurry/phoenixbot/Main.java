@@ -46,6 +46,11 @@ public class Main
     }
 
     public void run(String[] args) throws IOException {
+        // Register a shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            onShutDown();
+        }));
+
         // Init Logger
         logger = Logger.getGlobal();
         System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s %n");
@@ -102,6 +107,12 @@ public class Main
 
         _logger.Log(LogManager.LogType.SYSTEM, 1, "The BOT has been started successfully!\n\n");
 
+    }
+
+    protected void onShutDown(){
+        System.out.println("Application is shutting down...");
+        jda.shutdownNow();
+        System.out.println("The Bot is now Offline!");
     }
 
     private void commandRegistration() {
