@@ -3,7 +3,7 @@ package net.rainbowfurry.phoenixbot.commands.info;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
 import net.rainbowfurry.phoenixbot.commands.Command;
-import net.rainbowfurry.phoenixbot.core.CommandParser;
+import net.rainbowfurry.phoenixbot.commands.core.CommandParser;
 
 import java.awt.*;
 

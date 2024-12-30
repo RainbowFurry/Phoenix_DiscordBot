@@ -15,7 +15,7 @@ import net.rainbowfurry.phoenixbot.commands.Test;
 import net.rainbowfurry.phoenixbot.commands.info.Help;
 import net.rainbowfurry.phoenixbot.commands.info.ServerInfo;
 import net.rainbowfurry.phoenixbot.commands.info.UserInfo;
-import net.rainbowfurry.phoenixbot.core.CommandHandler;
+import net.rainbowfurry.phoenixbot.commands.core.CommandHandler;
 import net.rainbowfurry.phoenixbot.listener.*;
 import net.rainbowfurry.phoenixbot.listener.essentials.BotGuildJoinListener;
 import net.rainbowfurry.phoenixbot.listener.essentials.CommandListener;
@@ -109,7 +109,7 @@ public class Main
 
     }
 
-    protected void onShutDown(){
+    private void onShutDown(){
         System.out.println("Application is shutting down...");
         jda.shutdownNow();
         System.out.println("The Bot is now Offline!");

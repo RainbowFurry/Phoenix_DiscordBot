@@ -1,15 +1,13 @@
-package net.rainbowfurry.phoenixbot.core;
+package net.rainbowfurry.phoenixbot.commands.core;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
 
 import java.awt.*;
-import java.nio.channels.Channel;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;

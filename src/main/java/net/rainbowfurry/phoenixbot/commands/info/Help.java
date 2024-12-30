@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
 import net.rainbowfurry.phoenixbot.commands.Command;
+import net.rainbowfurry.phoenixbot.builder.TextFormatting;
 
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +22,7 @@ public class Help implements Command {
         CustomEmbedBuilder customEmbedBuilder = new CustomEmbedBuilder();
         customEmbedBuilder.setContent("💡**You need help with me?**\n" +
                 "You can find every Information you need under:\n" +
-                "https://docs.rainbowfurry.com/phoenix-discord-bot").
+                        TextFormatting.link("Wiki", "https://docs.rainbowfurry.com/phoenix-discord-bot")).
                 setThumbnail(event.getJDA().getSelfUser().getAvatarUrl()).
                 setEmbedColor(Color.CYAN);
 

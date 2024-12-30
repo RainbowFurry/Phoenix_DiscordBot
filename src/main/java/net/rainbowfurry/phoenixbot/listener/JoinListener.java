@@ -4,7 +4,6 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
-import net.rainbowfurry.phoenixbot.core.CommandParser;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package net.rainbowfurry.phoenixbot.core;
+package net.rainbowfurry.phoenixbot.commands.core;
 
 import net.rainbowfurry.phoenixbot.commands.Command;
 

@@ -3,7 +3,7 @@ package net.rainbowfurry.phoenixbot.listener.essentials;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.rainbowfurry.phoenixbot.core.CommandHandler;
+import net.rainbowfurry.phoenixbot.commands.core.CommandHandler;
 
 public class CommandListener extends ListenerAdapter {
 

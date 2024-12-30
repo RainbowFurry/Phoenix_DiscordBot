@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
 import net.rainbowfurry.phoenixbot.commands.Command;
-import net.rainbowfurry.phoenixbot.core.CommandParser;
+import net.rainbowfurry.phoenixbot.commands.core.CommandParser;
 
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
