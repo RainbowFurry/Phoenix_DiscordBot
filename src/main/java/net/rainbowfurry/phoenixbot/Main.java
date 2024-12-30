@@ -9,14 +9,14 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import net.rainbowfurry.phoenixbot.commands.admin.Clear;
+import net.rainbowfurry.phoenixbot.commands.Ping;
+import net.rainbowfurry.phoenixbot.commands.admin.*;
 import net.rainbowfurry.phoenixbot.commands.Test;
 import net.rainbowfurry.phoenixbot.commands.info.Help;
 import net.rainbowfurry.phoenixbot.commands.info.ServerInfo;
 import net.rainbowfurry.phoenixbot.commands.info.UserInfo;
 import net.rainbowfurry.phoenixbot.core.CommandHandler;
-import net.rainbowfurry.phoenixbot.listener.JoinListener;
-import net.rainbowfurry.phoenixbot.listener.LeaveListener;
+import net.rainbowfurry.phoenixbot.listener.*;
 import net.rainbowfurry.phoenixbot.listener.essentials.BotGuildJoinListener;
 import net.rainbowfurry.phoenixbot.listener.essentials.CommandListener;
 import net.rainbowfurry.phoenixbot.listener.essentials.ReadyListener;
@@ -35,9 +35,10 @@ public class Main
 
     private static Main instance;
     public static JDA jda;
-    private static JDABuilder builder;
+    public static JDABuilder builder;
     public static Logger logger;
     private static LogManager _logger;
+    private static CommandListUpdateAction commands;
 
     public static void main( String[] args ) throws IOException {
 
@@ -72,30 +73,15 @@ public class Main
 
         jda = builder.build();
 
-        //ToDo Example Commands In Bot Command List View
-        CommandListUpdateAction commands = jda.updateCommands();
-        commands.addCommands(
-                // Auf server der Command Menu Button
-                Commands.slash("botinfo", "Provides Info about the Bot"),
-                Commands.slash("serverinfo", "Provides Info about the Server"),
-                Commands.slash("ping", "Shows your Connection to the Server."),
-                // auf user und dann apps (info, kick, mute, warn, ban)
-                //ToDo nur für Guilde?
-                /*Commands.user("User Info"),
-                Commands.user("Kick"),
-                Commands.user("Mute"),
-                Commands.user("Warn"),
-                Commands.user("Ban"),*/
-                //Commands.user("Moderation"),
-                // drei punkte bei nachrichten und apps (KP)
-                Commands.message("Message Info"),
-                Commands.message("Moderation"),
-                Commands.message("Translate"),
-                Commands.message("Archive")
-        ).queue();
+        // Bot Interaction Commands
+        commands = jda.updateCommands();
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot Interactions");
+        registerInteractionCommands();
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot Interactions");
+        commands.queue();
 
+        // TEST
         Guild guild = jda.getGuildById("1309574664141668393");
-
         if (guild != null) {
             guild.updateCommands().addCommands(
                     Commands.user("Moderation")
@@ -116,12 +102,12 @@ public class Main
 
     private static void commandRegistration() {
         // Admin
-        // CommandHandler.commandMap.put("ban", new Test());
-        // CommandHandler.commandMap.put("kick", new Test());
-        // CommandHandler.commandMap.put("warn", new Test());
-        // CommandHandler.commandMap.put("mute", new Test());
+         CommandHandler.commandMap.put("ban", new Ban());
+         CommandHandler.commandMap.put("kick", new Kick());
+         CommandHandler.commandMap.put("warn", new Warn());
+         CommandHandler.commandMap.put("mute", new Mute());
         // User
-        // CommandHandler.commandMap.put("ping", new Test());
+         CommandHandler.commandMap.put("ping", new Ping());
         // CommandHandler.commandMap.put("invitebot", new Test());
         // CommandHandler.commandMap.put("invite", new Test());
         // Fun
@@ -151,10 +137,61 @@ public class Main
         // Listener
         jda.addEventListener(new JoinListener());
         jda.addEventListener(new LeaveListener());
-        // Support Listener
-        // Ticket Listener
-        // Self Role Listener
+        jda.addEventListener(new SupportListener());
+        jda.addEventListener(new TicketListener());
+        jda.addEventListener(new SelfroleListener());
+        jda.addEventListener(new GiveAwayListener());
+        jda.addEventListener(new JoinRolesListener());
 
+    }
+
+
+    /**
+     * BOT INTERACTION COMMANDS
+     */
+
+    private static void registerInteractionCommands(){
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot Command Interaction Commands");
+        registerBotInteractionCommands();
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot Menu Interaction Commands");
+        registerMenuInteractionCommands();
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot User Interaction Commands");
+        registerUserInteractionCommands();
+    }
+
+    private static void registerUserInteractionCommands(){
+        commands.addCommands(
+                // Auf server der Command Menu Button
+                //ToDo nur für Guilde?
+                /*Commands.user("User Info"),
+                //Commands.user("Moderation"),
+                Commands.user("Kick"),
+                Commands.user("Mute"),
+                Commands.user("Warn"),
+                Commands.user("Ban")*/
+        );
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot User Interaction Commands");
+    }
+
+    private static void registerMenuInteractionCommands(){
+        commands.addCommands(
+                // drei punkte bei nachrichten und apps (KP)
+                Commands.message("Message Info"),
+                Commands.message("Moderation"),
+                Commands.message("Translate"),
+                Commands.message("Archive")
+        );
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot Menu Interaction Commands");
+    }
+
+    private static void registerBotInteractionCommands(){
+        commands.addCommands(
+                // Auf server der Command Menu Button
+                Commands.slash("botinfo", "Provides Info about the Bot"),
+                Commands.slash("serverinfo", "Provides Info about the Server"),
+                Commands.slash("ping", "Shows your Connection to the Server.")
+        );
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot Command Interaction Commands");
     }
 
 }

@@ -15,6 +15,10 @@ public class UserInteractionListener extends ListenerAdapter {
                 userInfo.displayUserInfo(event.getTargetMember(), event.getMessageChannel());
                 break;
 
+            case "Moderation":
+                //
+                break;
+
             case "Kick":
                 //
                 break;
@@ -28,10 +32,6 @@ public class UserInteractionListener extends ListenerAdapter {
                 break;
 
             case "Mute":
-                //
-                break;
-
-            case "Mod":
                 //
                 break;
 

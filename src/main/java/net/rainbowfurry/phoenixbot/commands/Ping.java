@@ -1,21 +1,35 @@
 package net.rainbowfurry.phoenixbot.commands;
 
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
 import java.awt.*;
 
-public class Ping {
+public class Ping implements Command {
 
-    private static long inputTime;
+    private long inputTime;
 
-    /*
-    *     setInputTime(System.currentTimeMillis());
-    long processing = (new Date()).getTime() - inputTime;
-    long ping = event.getJDA().getGatewayPing();
-    event.getHook().editOriginalEmbeds(new MessageEmbed[] { (new CustomEmbedBuilder()).setEmbedColor(Color.MAGENTA).setTitle("Ping").setContent(String.format(":ping_pong:   Pong!\n\nThe Bot takes **%s milliseconds** to answer.", new Object[] { Long.valueOf(ping) })).build() }).queue();
-    return true;
-    * */
+    @Override
+    public boolean called(String[] args, MessageReceivedEvent event) {
+        return false;
+    }
 
-    public static void setInputTime(long inputTimeLong) {
-        inputTime = inputTimeLong;
+    @Override
+    public void action(String[] args, MessageReceivedEvent event) throws Exception {
+
+    }
+
+    @Override
+    public void executed(boolean success, MessageReceivedEvent event) {
+
+    }
+
+    @Override
+    public String help() {
+        return "";
+    }
+
+    public void setInputTime(long inputTime) {
+        this.inputTime = inputTime;
     }
 
     private Color getColorByPing(long ping) {

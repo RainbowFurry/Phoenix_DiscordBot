@@ -9,8 +9,25 @@ public class MessageInteractionListener extends ListenerAdapter {
     public void onMessageContextInteraction(MessageContextInteractionEvent event) {
         switch (event.getName()) {
 
+            //TEST
             case "Count words":
                 event.reply("Words: " + event.getTarget().getContentRaw().split("\\s+").length).queue();
+                break;
+
+            case "Message Info":
+                //
+                break;
+
+            case "Moderation":
+                //
+                break;
+
+            case "Translate":
+                //
+                break;
+
+            case "Archive":
+                //
                 break;
 
         }

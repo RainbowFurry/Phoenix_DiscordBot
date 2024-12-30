@@ -3,9 +3,6 @@ package net.rainbowfurry.phoenixbot.commands;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.rainbowfurry.phoenixbot.builder.CustomEmbedBuilder;
-import net.rainbowfurry.phoenixbot.core.CommandParser;
-
-import java.awt.*;
 
 public class Test implements Command {
     @Override
@@ -18,9 +15,10 @@ public class Test implements Command {
         CustomEmbedBuilder customEmbedBuilder = new CustomEmbedBuilder();
         Member member = event.getMember();
 
+        //Main.jda = Main.builder.setActivity(Activity.of(Activity.ActivityType.CUSTOM_STATUS, "TEST")).build();//Geht!
 
-        customEmbedBuilder.setEmbedColor(Color.GREEN).setThumbnail(member.getEffectiveAvatarUrl()).setContent(member.getAsMention() + "has joined the Server!");
-        CommandParser.sendMessage(event, customEmbedBuilder);
+        //customEmbedBuilder.setEmbedColor(Color.GREEN).setThumbnail(member.getEffectiveAvatarUrl()).setContent(member.getAsMention() + "has joined the Server!");
+        //CommandParser.sendMessage(event, customEmbedBuilder);
     }
 
     @Override
