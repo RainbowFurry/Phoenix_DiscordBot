@@ -13,7 +13,7 @@ public class ReadyListener extends ListenerAdapter {
         StringBuilder onGuilds = new StringBuilder();
         for(Guild guild : event.getJDA().getGuilds())
             onGuilds.append("Name: ").append(guild.getName()).append(", ID: ").append(guild.getId()).append("\n");
-        Main.logger.info("This bot is on following servers:\n" + onGuilds);
+        Main.instance.logger.info("This bot is on following servers:\n" + onGuilds);
 
         // event.getJDA().getGuilds().forEach(Main::manageMySQL);
 

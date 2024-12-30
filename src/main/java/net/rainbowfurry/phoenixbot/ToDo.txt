@@ -1,8 +1,5 @@
 Config einbinden - prefix etc
 Beschreibung alle base Klassen - was macht was
 check if bot channel, check if permission
-
-random status
-wie in bot command integrated
-
 delete all messages if in wrong channel after scedul
+random status

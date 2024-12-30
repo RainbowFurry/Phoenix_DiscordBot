@@ -33,15 +33,19 @@ import java.util.logging.Logger;
 public class Main
 {
 
-    private static Main instance;
-    public static JDA jda;
-    public static JDABuilder builder;
-    public static Logger logger;
-    private static LogManager _logger;
-    private static CommandListUpdateAction commands;
+    public static Main instance;
+    private JDA jda;
+    private JDABuilder builder;
+    public Logger logger;
+    public LogManager _logger;
+    private CommandListUpdateAction commands;
 
     public static void main( String[] args ) throws IOException {
+        instance = new Main();
+        instance.run(args);
+    }
 
+    public void run(String[] args) throws IOException {
         // Init Logger
         logger = Logger.getGlobal();
         System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s %n");
@@ -88,7 +92,7 @@ public class Main
             ).queue();
         }
 
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The Bot has been initialized without errors!");
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "The Bot has been initialized successfully!");
 
         // Command and Listener Registration
         commandRegistration();
@@ -96,11 +100,11 @@ public class Main
         listenerRegistration();
         _logger.Log(LogManager.LogType.SYSTEM, 1, "The Listener have been loaded!");
 
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The BOT has been started successfully without Errors!\n\n");
+        _logger.Log(LogManager.LogType.SYSTEM, 1, "The BOT has been started successfully!\n\n");
 
     }
 
-    private static void commandRegistration() {
+    private void commandRegistration() {
         // Admin
          CommandHandler.commandMap.put("ban", new Ban());
          CommandHandler.commandMap.put("kick", new Kick());
@@ -123,7 +127,7 @@ public class Main
         CommandHandler.commandMap.put("clear", new Clear());
     }
 
-    private static void listenerRegistration() {
+    private void listenerRegistration() {
 
         // Essentials Bot Listener
         jda.addEventListener(new CommandListener(new CommandHandler()));//Handle Commands
@@ -145,12 +149,19 @@ public class Main
 
     }
 
+    public void updateBotStatus(Activity activity){
+        jda = builder.setActivity(activity).build();
+    }
+
+    public void updateBotStatus(Activity.ActivityType activityType, String content){
+        jda = builder.setActivity(Activity.of(activityType, content)).build();
+    }
 
     /**
      * BOT INTERACTION COMMANDS
      */
 
-    private static void registerInteractionCommands(){
+    private void registerInteractionCommands(){
         _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot Command Interaction Commands");
         registerBotInteractionCommands();
         _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot Menu Interaction Commands");
@@ -159,7 +170,7 @@ public class Main
         registerUserInteractionCommands();
     }
 
-    private static void registerUserInteractionCommands(){
+    private void registerUserInteractionCommands(){
         commands.addCommands(
                 // Auf server der Command Menu Button
                 //ToDo nur für Guilde?
@@ -173,7 +184,7 @@ public class Main
         _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot User Interaction Commands");
     }
 
-    private static void registerMenuInteractionCommands(){
+    private void registerMenuInteractionCommands(){
         commands.addCommands(
                 // drei punkte bei nachrichten und apps (KP)
                 Commands.message("Message Info"),
@@ -184,7 +195,7 @@ public class Main
         _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot Menu Interaction Commands");
     }
 
-    private static void registerBotInteractionCommands(){
+    private void registerBotInteractionCommands(){
         commands.addCommands(
                 // Auf server der Command Menu Button
                 Commands.slash("botinfo", "Provides Info about the Bot"),
