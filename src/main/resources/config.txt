@@ -1,0 +1,4 @@
+activityState=ONLINE
+activityText=Your Status
+activityType=CUSTOM_STATUS
+token=XXXX
