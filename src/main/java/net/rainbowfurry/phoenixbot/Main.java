@@ -42,8 +42,12 @@ public class Main
     private CommandListUpdateAction commands;
 
     public static void main( String[] args ) throws IOException {
-        instance = new Main();
-        instance.run(args);
+      try {
+          instance = new Main();
+          instance.run(args);
+      }catch (Exception exception){
+          instance._logger.Error(exception);
+      }
     }
 
     public void run(String[] args) throws IOException {
@@ -55,22 +59,23 @@ public class Main
         // Init Logger
         logger = Logger.getGlobal();
         System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s %n");
+
         _logger = new LogManager();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "\nBotName: Phoenix\nCreator: Jasmin Hoffmann\nNickName:RainbowFurry\n");
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "All Infos About the Bot: https://docs.rainbowfurry.com/phoenix-discord-bot\n\n");
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The Bot is starting Up!");
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The Logger has been initialized and loaded!");
+        _logger.Info("\nBotName: Phoenix\nCreator: Jasmin Hoffmann\nNickName:RainbowFurry\n");
+        _logger.Info("All Infos About the Bot: https://docs.rainbowfurry.com/phoenix-discord-bot\n\n");
+        _logger.Info( "The Bot is starting Up!");
+        _logger.Info( "The Logger has been initialized and loaded!");
 
         // Init Configs
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start loading Configs.");
+        _logger.Info( "Start loading Configs.");
         ConfigManager configManager = new ConfigManager();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The Config has been created and loaded!");
+        _logger.Info("The Config has been created and loaded!");
 
         // Init SQL
         //...
 
         // Init Bot
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start loading Bot.");
+        _logger.Info( "Start loading Bot.");
         builder = JDABuilder.createDefault(configManager.getKey("token"));
         builder.setAutoReconnect(true);
         builder.disableCache(CacheFlag.MEMBER_OVERRIDES, new CacheFlag[] { CacheFlag.VOICE_STATE });
@@ -86,9 +91,9 @@ public class Main
 
         // Bot Interaction Commands
         commands = jda.updateCommands();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot Interactions");
+        _logger.Info("Start Loading Bot Interactions");
         registerInteractionCommands();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot Interactions");
+        _logger.Info("Finished Loading Bot Interactions");
         commands.queue();
 
         // TEST
@@ -100,15 +105,15 @@ public class Main
             ).queue();
         }
 
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The Bot has been initialized successfully!");
+        _logger.Info("The Bot has been initialized successfully!");
 
         // Command and Listener Registration
         commandRegistration();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The Commands have been loaded!");
+        _logger.Info( "The Commands have been loaded!");
         listenerRegistration();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The Listener have been loaded!");
+        _logger.Info( "The Listener have been loaded!");
 
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "The BOT has been started successfully!\n\n");
+        _logger.Info("The BOT has been started successfully!\n\n");
 
     }
 
@@ -177,11 +182,11 @@ public class Main
      */
 
     private void registerInteractionCommands(){
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot Command Interaction Commands");
+        _logger.Info( "Start Loading Bot Command Interaction Commands");
         registerBotInteractionCommands();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot Menu Interaction Commands");
+        _logger.Info( "Start Loading Bot Menu Interaction Commands");
         registerMenuInteractionCommands();
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Start Loading Bot User Interaction Commands");
+        _logger.Info( "Start Loading Bot User Interaction Commands");
         registerUserInteractionCommands();
     }
 
@@ -196,7 +201,7 @@ public class Main
                 Commands.user("Warn"),
                 Commands.user("Ban")*/
         );
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot User Interaction Commands");
+        _logger.Info( "Finished Loading Bot User Interaction Commands");
     }
 
     private void registerMenuInteractionCommands(){
@@ -207,7 +212,7 @@ public class Main
                 Commands.message("Translate"),
                 Commands.message("Archive")
         );
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot Menu Interaction Commands");
+        _logger.Info( "Finished Loading Bot Menu Interaction Commands");
     }
 
     private void registerBotInteractionCommands(){
@@ -218,7 +223,7 @@ public class Main
                 Commands.slash("ping", "Shows your Connection to the Server."),
                 Commands.slash("test", "For Testing!!!")
         );
-        _logger.Log(LogManager.LogType.SYSTEM, 1, "Finished Loading Bot Command Interaction Commands");
+        _logger.Info( "Finished Loading Bot Command Interaction Commands");
     }
 
 }
