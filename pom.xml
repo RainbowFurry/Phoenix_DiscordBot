@@ -39,10 +39,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version> <!-- or a later version -->
+        <version>3.13.0</version> <!-- or a later version -->
         <configuration>
-          <source>23</source>
-          <target>23</target>
+          <source>21</source>
+          <target>21</target>
         </configuration>
       </plugin>
       <plugin>
