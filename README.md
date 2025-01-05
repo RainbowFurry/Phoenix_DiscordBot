@@ -60,11 +60,11 @@ Thanks very much to all of my sponsors.
 [contributors-url]: https://github.com/RainbowFurry/Phoenix_DiscordBot/graphs/contributors
 [forks-badge]: https://img.shields.io/github/forks/RainbowFurry/Phoenix_DiscordBot?style=for-the-badge
 [forks-url]: https://github.com/RainbowFurry/Phoenix_DiscordBot/network/members
-[stars-badge]: https://img.shields.io/github/stars/Phoenix_DiscordBot/Phoenix_TelegramBOT_API?style=for-the-badge
+[stars-badge]: https://img.shields.io/github/stars/RainbowFurry/Phoenix_DiscordBot?style=for-the-badge
 [stars-url]: https://github.com/RainbowFurry/Phoenix_DiscordBot/stargazers
-[issues-badge]: https://img.shields.io/github/issues/Phoenix_DiscordBot/Phoenix_TelegramBOT_API?style=for-the-badge
+[issues-badge]: https://img.shields.io/github/issues/RainbowFurry/Phoenix_DiscordBot?style=for-the-badge
 [issues-url]: https://github.com/RainbowFurry/Phoenix_DiscordBot/issues
-[release-badge]: https://img.shields.io/github/v/release/Phoenix_DiscordBot/Phoenix_TelegramBOT_API?style=for-the-badge
+[release-badge]: https://img.shields.io/github/v/release/RainbowFurry/Phoenix_DiscordBot?style=for-the-badge
 [release-url]: https://github.com/RainbowFurry/Phoenix_DiscordBot/releases
 [discord-id]: https://img.shields.io/discord/1013602813093359657?logo=discord&style=for-the-badge
 [discord-invite]: https://discord.gg/ugDvSw7cns
