@@ -1,5 +1,5 @@
 
-# Appname
+# Phoenix_DiscordBot
 ![GitHub contributors][contributors-badge]
 ![GitHub forks][forks-badge]
 ![GitHub stars][stars-badge]
